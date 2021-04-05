@@ -41,4 +41,29 @@
         </operation>
     </file>
 
+    <!-- Добавляет переменную date_delivery в модель для возможности редактирования -->
+    <file path="admin/model/catalog/product.php">
+
+        <operation>
+            <search><![CDATA[
+                $product_id = $this->db->getLastId();
+            ]]></search>
+            <add position="after"><![CDATA[
+                //Date Delivery
+                $this->db->query("UPDATE " . DB_PREFIX . "product SET date_delivery = '" . $this->db->escape($data['date_delivery']) . "' WHERE product_id = '" . (int)$product_id . "'");
+                //Date Delivery END
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search><![CDATA[
+                public function editProduct($product_id, $data) {
+            ]]></search>
+            <add position="after"><![CDATA[
+                //Date Delivery
+                $this->db->query("UPDATE " . DB_PREFIX . "product SET date_delivery = '" . $this->db->escape($data['date_delivery']) . "' WHERE product_id = '" . (int)$product_id . "'");
+                //Date Delivery END
+            ]]></add>
+        </operation>
+    </file>
 </modification>
