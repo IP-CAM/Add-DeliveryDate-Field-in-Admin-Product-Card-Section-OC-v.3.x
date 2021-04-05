@@ -11,21 +11,22 @@
 
         <operation>
             <search><![CDATA[
-                function index() {
+                public function index() {
             ]]></search>
             <add position="after"><![CDATA[
                 //Date Delivery
-                $check_date_delivery = $this->db->query("DESCRIBE " . DB_PREFIX . "product `date_delivery`");
-                if ($check_date_delivery->num_rows == 0) {
-                    $this->db->query("ALTER TABLE " . DB_PREFIX ."product ADD `date_delivery` date NOT NULL default '0000-00-00' COLLATE utf8_general_ci BEFORE `date_available`");
+                $sqldd = "DESCRIBE " . DB_PREFIX . "product `date_delivery`";
+                $querydd = $this->db->query($sqldd);
+                if ($querydd->num_rows == 0) {
+                    $this->db->query("ALTER TABLE " . DB_PREFIX ."product ADD `date_delivery` DATE NOT NULL default '0000-00-00' AFTER `tax_class_id`");
                 }
                 //Date Delivery END
             ]]></add>
         </operation>
-
+ 
         <operation>
             <search><![CDATA[
-                if (isset($this->request->post['date_delivery'])) {
+                if (isset($this->request->post['date_available'])) {
             ]]></search>
             <add position="before"><![CDATA[
                 //Date Delivery
@@ -74,7 +75,7 @@
             <search><![CDATA[
                 <label class="col-sm-2 control-label" for="input-date-available">{{ entry_date_available }}</label>
             ]]></search>
-            <add position="before" ofsset="1"><![CDATA[
+            <add position="before"><![CDATA[
                 <!-- Date Delivery -->
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="input-date-delivery">{{ entry_date_delivery }}</label>
