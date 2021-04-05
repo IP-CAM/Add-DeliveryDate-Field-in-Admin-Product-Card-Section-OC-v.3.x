@@ -89,4 +89,33 @@
             ]]></add>
         </operation>
     </file>
+
+    <!-- Добавляет перевод для даты поставки на английском и русском языке -->
+    <file path="admin/language/en-gb/catalog/product.php">
+
+		<operation error="skip">
+			<search><![CDATA[
+                <?php
+            ]]></search>
+			<add position="after"><![CDATA[
+                // Date Delivery
+                $_['entry_date_delivery']	= 'Date Delivery';
+                // Date Delivery END
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="admin/language/ru-ru/catalog/product.php">
+
+		<operation error="skip">
+			<search><![CDATA[
+                <?php
+            ]]></search>
+			<add position="after"><![CDATA[
+                // Date Delivery
+                $_['entry_date_delivery']	= 'Дата поставки';
+                // Date Delivery END
+			]]></add>
+		</operation>
+	</file>
 </modification>
