@@ -66,4 +66,27 @@
             ]]></add>
         </operation>
     </file>
+
+    <!-- Выводит поле с датой поставки в админке товара -->
+    <file path="admin/view/template/catalog/product_form.twig">
+
+        <operation>
+            <search><![CDATA[
+                <label class="col-sm-2 control-label" for="input-date-available">{{ entry_date_available }}</label>
+            ]]></search>
+            <add position="before" ofsset="1"><![CDATA[
+                <!-- Date Delivery -->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-date-delivery">{{ entry_date_delivery }}</label>
+                    <div class="col-sm-3">
+                      <div class="input-group date">
+                        <input type="text" name="date_delivery" value="{{ date_delivery }}" placeholder="{{ entry_date_delivery }}" data-date-format="YYYY-MM-DD" id="input-date-delivery" class="form-control"/> <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                        </span></div>
+                    </div>
+                </div>
+                <!-- Date Delivery END -->
+            ]]></add>
+        </operation>
+    </file>
 </modification>
