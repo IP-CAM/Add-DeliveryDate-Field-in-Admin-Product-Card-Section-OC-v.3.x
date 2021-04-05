@@ -5,4 +5,24 @@
 	<author>Max Borschev</author>
 	<link>https://github.com/ZloyDeDD</link>
 	<code>datedelivery</code>
+
+    <file path="admin/controller/catalog/product.php">
+
+        <!-- Проверяет наличие колонки date_delivery и добавляет ее в таблицу product если колонки нет -->
+        <operation>
+            <search><![CDATA[
+                function index() {
+            ]]></search>
+            <add position="after"><![CDATA[
+                //Date Delivery
+                $check_date_delivery = $this->db->query("DESCRIBE " . DB_PREFIX . "product `date_delivery`");
+                if ($check_date_delivery->num_rows == 0) {
+                    $this->db->query("ALTER TABLE " . DB_PREFIX ."product ADD `date_delivery` date NOT NULL default '0000-00-00' COLLATE utf8_general_ci BEFORE `date_available`");
+                }
+                //Date Delivery END
+            ]]></add>
+        </operation>
+
+    </file>
+
 </modification>
