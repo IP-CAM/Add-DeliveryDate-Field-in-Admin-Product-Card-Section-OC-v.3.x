@@ -6,9 +6,9 @@
 	<link>https://github.com/ZloyDeDD</link>
 	<code>datedelivery</code>
 
+    <!-- Проверяет наличие колонки date_delivery и добавляет ее в таблицу product если колонки нет -->
     <file path="admin/controller/catalog/product.php">
 
-        <!-- Проверяет наличие колонки date_delivery и добавляет ее в таблицу product если колонки нет -->
         <operation>
             <search><![CDATA[
                 function index() {
@@ -23,6 +23,22 @@
             ]]></add>
         </operation>
 
+        <operation>
+            <search><![CDATA[
+                if (isset($this->request->post['date_delivery'])) {
+            ]]></search>
+            <add position="before"><![CDATA[
+                //Date Delivery
+                if (isset($this->request->post['date_delivery'])) {
+                    $data['date_delivery'] = $this->request->post['date_delivery'];
+                } elseif (!empty($product_info)) {
+                    $data['date_delivery'] = ($product_info['date_delivery'] != '0000-00-00') ? $product_info['date_delivery'] : '';
+                } else {
+                    $data['date_delivery'] = date('Y-m-d');
+                }
+                //Date Delivery END
+            ]]></add>
+        </operation>
     </file>
 
 </modification>
