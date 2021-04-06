@@ -18,7 +18,7 @@
                 $sqldd = "DESCRIBE " . DB_PREFIX . "product `date_delivery`";
                 $querydd = $this->db->query($sqldd);
                 if ($querydd->num_rows == 0) {
-                    $this->db->query("ALTER TABLE " . DB_PREFIX ."product ADD `date_delivery` DATE NOT NULL default '0000-00-00' AFTER `tax_class_id`");
+                    $this->db->query("ALTER TABLE " . DB_PREFIX ."product ADD `date_delivery` DATE NOT NULL default '1970-01-01' AFTER `tax_class_id`");
                 }
                 //Date Delivery END
             ]]></add>
@@ -33,7 +33,7 @@
                 if (isset($this->request->post['date_delivery'])) {
                     $data['date_delivery'] = $this->request->post['date_delivery'];
                 } elseif (!empty($product_info)) {
-                    $data['date_delivery'] = ($product_info['date_delivery'] != '0000-00-00') ? $product_info['date_delivery'] : '';
+                    $data['date_delivery'] = ($product_info['date_delivery'] != '1970-01-01') ? $product_info['date_delivery'] : '';
                 } else {
                     $data['date_delivery'] = date('Y-m-d');
                 }
@@ -75,7 +75,7 @@
             <search><![CDATA[
                 <label class="col-sm-2 control-label" for="input-date-available">{{ entry_date_available }}</label>
             ]]></search>
-            <add position="before"><![CDATA[
+            <add position="before" offset="1"><![CDATA[
                 <!-- Date Delivery -->
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="input-date-delivery">{{ entry_date_delivery }}</label>
